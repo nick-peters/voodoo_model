@@ -1,0 +1,48 @@
+<script>
+  function DonutShop(address, hoursOpen, footTrafficLow, footTrafficHigh, percentEntering, donutsPerEntrant) {
+
+    this.address = address;
+    this.hoursOpen = hoursOpen;
+    this.footTrafficLow = footTrafficLow;
+    this.footTrafficHigh = footTrafficHigh;
+    this.percentEntering = percentEntering;
+    this.donutsPerEntrant = donutsPerEntrant;
+    //var self = this;
+    //.bind .apply data binding
+    //var _something - underscore is used to denote private
+    this.totalDonuts = 0;
+    this.donutsEachHour = [];
+
+    this.randomTraffic = function() {
+      return Math.floor(this.footTrafficLow + (Math.random() * (this.footTrafficHigh - this.footTrafficLow)) + 0.5)
+    };
+
+    this.donutsThisHour = function() {
+      return Math.floor((this.donutsPerEntrant * this.randomTraffic() * (this.percentEntering / 100)) + 0.5)
+    };
+
+    this.calculateDonuts = function() {
+      console.log("Location: " + this.address)
+      for(var i = 0; i < this.hoursOpen; i++) {
+        this.donutsEachHour[i] = this.donutsThisHour();
+        this.totalDonuts += this.donutsEachHour[i];
+        console.log("Hour " + i + ": " + this.donutsEachHour[i]);
+      }
+      console.log("Total Donuts: " + this.totalDonuts);
+    };
+
+  }
+
+  var downtown = new DonutShop("Downtown", 11, 80, 220, 10, 4);
+  var capitolHill = new DonutShop("Capitol Hill", 11, 5, 45, 45, 2);
+  var southLakeUnion = new DonutShop("South Lake Union", 11, 180, 250, 5, 6);
+  var wedgewood = new DonutShop("Wedgewood", 11, 20, 60, 20, 1.5);
+  var bellard = new DonutShop("Bellard", 11, 25, 175, 33, 1);
+
+  downtown.calculateDonuts();
+  capitolHill.calculateDonuts();
+  southLakeUnion.calculateDonuts();
+  wedgewood.calculateDonuts();
+  bellard.calculateDonuts();
+
+</script>
