@@ -22,13 +22,13 @@
     };
 
     this.calculateDonuts = function() {
-      console.log("Location: " + this.address)
+      console.log("Location: " + this.address + "\n")
       for(var i = 0; i < this.hoursOpen; i++) {
         this.donutsEachHour[i] = this.donutsThisHour();
         this.totalDonuts += this.donutsEachHour[i];
-        console.log("Hour " + i + ": " + this.donutsEachHour[i]);
+        console.log("Hour " + i + ": " + this.donutsEachHour[i] + "\n");
       }
-      console.log("Total Donuts: " + this.totalDonuts);
+      console.log("Total Donuts: " + this.totalDonuts + "\n");
     };
 
   }
