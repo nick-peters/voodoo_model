@@ -14,15 +14,15 @@
     this.donutsEachHour = [];
 
     this.randomTraffic = function() {
-      return Math.floor(this.footTrafficLow + (Math.random() * (this.footTrafficHigh - this.footTrafficLow)) + 0.5)
+      return Math.round(this.footTrafficLow + Math.floor(Math.random() * (this.footTrafficHigh - this.footTrafficLow + 1)));
     };
 
     this.donutsThisHour = function() {
-      return Math.floor((this.donutsPerEntrant * this.randomTraffic() * (this.percentEntering / 100)) + 0.5)
+      return Math.round(this.donutsPerEntrant * this.randomTraffic() * (this.percentEntering / 100));
     };
 
     this.calculateDonuts = function() {
-      console.log("Location: " + this.address + "\n")
+      console.log("Location: " + this.address + "\n");
       for(var i = 0; i < this.hoursOpen; i++) {
         this.donutsEachHour[i] = this.donutsThisHour();
         this.totalDonuts += this.donutsEachHour[i];
