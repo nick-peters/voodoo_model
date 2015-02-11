@@ -1,48 +1,45 @@
-<script>
-  function DonutShop(address, hoursOpen, footTrafficLow, footTrafficHigh, percentEntering, donutsPerEntrant) {
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Voodoo Donuts</title>
+  </head>
+  <body>
+    <nav>
+      <table cellpadding="15" cellspacing="15">
+        <tr bgcolor="cfcfcf">
+          <th class="locationButton" id="downtown">Downtown</th>
+          <th class="locationButton" id="capitolHill">Capitol Hill</th>
+          <th class="locationButton" id="southLakeUnion">Southlake Union</th>
+          <th class="locationButton" id="wedgewood">Wedgewood</th>
+          <th class="locationButton" id="ballard">Ballard</th>
+        </tr>
+      </table>
+    </nav>
+    <table cellpadding="5" cellspacing="5">
 
-    this.address = address;
-    this.hoursOpen = hoursOpen;
-    this.footTrafficLow = footTrafficLow;
-    this.footTrafficHigh = footTrafficHigh;
-    this.percentEntering = percentEntering;
-    this.donutsPerEntrant = donutsPerEntrant;
-    //var self = this;
-    //.bind .apply data binding
-    //var _something - underscore is used to denote private
-    this.totalDonuts = 0;
-    this.donutsEachHour = [];
+      <thead>
+        <tr bgcolor="cfcfcf">
+          <th id="locationName" colspan="2">No Location Selected</th>
+        </tr>
+        <tr bgcolor="cfcfcf">
+          <th>Time</th>
+          <th>Donuts This Hour</th>
+        </tr>
+      </thead>
 
-    this.randomTraffic = function() {
-      return Math.round(this.footTrafficLow + Math.floor(Math.random() * (this.footTrafficHigh - this.footTrafficLow + 1)));
-    };
+      <tbody id="voodooTable">
+      </tbody>
 
-    this.donutsThisHour = function() {
-      return Math.round(this.donutsPerEntrant * this.randomTraffic() * (this.percentEntering / 100));
-    };
+      <tfoot>
+        <tr height="10"></tr>
+        <tr bgcolor="cfcfcf">
+          <th>Total</th>
+          <td id="total" align="center"></td>
+        </tr>
+      </tfoot>
 
-    this.calculateDonuts = function() {
-      console.log("Location: " + this.address + "\n");
-      for(var i = 0; i < this.hoursOpen; i++) {
-        this.donutsEachHour[i] = this.donutsThisHour();
-        this.totalDonuts += this.donutsEachHour[i];
-        console.log("Hour " + i + ": " + this.donutsEachHour[i] + "\n");
-      }
-      console.log("Total Donuts: " + this.totalDonuts + "\n");
-    };
+    </table>
 
-  }
-
-  var downtown = new DonutShop("Downtown", 11, 80, 220, 10, 4);
-  var capitolHill = new DonutShop("Capitol Hill", 11, 5, 45, 45, 2);
-  var southLakeUnion = new DonutShop("South Lake Union", 11, 180, 250, 5, 6);
-  var wedgewood = new DonutShop("Wedgewood", 11, 20, 60, 20, 1.5);
-  var bellard = new DonutShop("Bellard", 11, 25, 175, 33, 1);
-
-  downtown.calculateDonuts();
-  capitolHill.calculateDonuts();
-  southLakeUnion.calculateDonuts();
-  wedgewood.calculateDonuts();
-  bellard.calculateDonuts();
-
-</script>
+  </body>
+  <script src="voodoo.js"></script>
+</html>
