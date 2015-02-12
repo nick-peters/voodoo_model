@@ -1,6 +1,6 @@
 var downtown = new DonutShop("Downtown", 11, 80, 220, 10, 4),
     capitolHill = new DonutShop("Capitol Hill", 8, 5, 45, 45, 2),
-    southLakeUnion = new DonutShop("South Lake Union", 14, 180, 250, 5, 6),
+    southLakeUnion = new DonutShop("South Lake Union", 10, 180, 250, 5, 6),
     wedgewood = new DonutShop("Wedgewood", 5, 20, 60, 20, 1.5),
     ballard = new DonutShop("Ballard", 12, 25, 175, 33, 1);
 
@@ -11,12 +11,14 @@ southLakeUnion.calculateDonuts();
 wedgewood.calculateDonuts();
 ballard.calculateDonuts();
 
+var transitioningTables = [];
+var tableDiv = document.getElementById("tableDiv");
 //Every location has a button, attach event listeners to each button
 var locationButtons = document.querySelectorAll("th.locationButton");
 
 for(var i = 0; i < locationButtons.length; i++) {
-  locationButtons[i].addEventListener('mouseover', function(e) {displayVoodoo(e);}, false)
-  locationButtons[i].addEventListener('mouseout', function(e) {displayVoodoo(e);}, false)
+  locationButtons[i].addEventListener('mouseover', displayVoodoo, false)
+  locationButtons[i].addEventListener('mouseout', removeVoodoo, false)
 }
 
 function DonutShop(address, hoursOpen, footTrafficLow, footTrafficHigh, percentEntering, donutsPerEntrant) {
@@ -55,32 +57,60 @@ function displayVoodoo(event) {
   /*currentLocation is set to the "id" of whatever button is currently firing
   the event*/
   var currentLocation = window[event.target.id],
-      voodooTable = document.getElementById("voodooTable"),
-      newHead,
+      voodooTable;
+
+  voodooTable = document.createElement("table");
+  voodooTable.id = "voodooTable";
+  voodooTable.appendChild(voodooHead(currentLocation));
+  voodooTable.appendChild(voodooBody(currentLocation));
+  voodooTable.appendChild(voodooFoot(currentLocation));
+
+  voodooTable.addEventListener("transitionend", transitionFinished, false);
+  voodooTable.className = "newTable";
+  tableDiv.appendChild(voodooTable);
+
+  setTimeout(function() {voodooTable.className = "currentTable";}, 20);
+}
+
+function voodooHead(currentLocation) {
+
+  var newTableHead,
       newRow,
-      newData,
-      timeConversion;
+      newHead;
 
-  //Clear the <tbody> of any content that it might already contain
-  while (voodooTable.firstChild) {
-    voodooTable.removeChild(voodooTable.firstChild);
-  }
+  newTableHead = document.createElement("thead")
+  newRow = document.createElement("tr");
+  newHead = document.createElement("th");
+  newHead.setAttribute("colspan", "2");
+  newHead.textContent = currentLocation.address;
+  newRow.appendChild(newHead);
+  newTableHead.appendChild(newRow);
 
-  /*If the mouse is LEAVING a button area, we've removed the <tbody> content
-  already, and can simply clear the "Location" & "Total" text, then return*/
-  if (event.type == "mouseout") {
-    document.getElementById("locationName").textContent = "No Location Selected";
-    document.getElementById("total").textContent = "";
-    return;
-  }
+  newRow = document.createElement("tr");
+  newHead = document.createElement("th");
+  newHead.textContent = "Time";
+  newRow.appendChild(newHead);
 
-  //Fill in the location name in the pre-existing table data element
-  document.getElementById("locationName").textContent = currentLocation.address;
+  newHead = document.createElement("th");
+  newHead.textContent = "Donuts";
+  newRow.appendChild(newHead);
 
+  newTableHead.appendChild(newRow);
+
+  return newTableHead;
+}
+
+function voodooBody(currentLocation) {
+
+  var newTableBody,
+      newRow,
+      newHead,
+      newData;
+
+  newTableBody = document.createElement("tbody");
   for (var i = 0; i < currentLocation.donutsEachHour.length; i++) {
     //Create initial table row element
     newRow = document.createElement("tr");
-    newRow.setAttribute("bgcolor", "cfcfcf");
 
     //Create and fill in table header element containing the hour of the day
     newHead = document.createElement("th");
@@ -97,6 +127,7 @@ function displayVoodoo(event) {
     else {
       newHead.textContent += " am";
     }
+    newHead.setAttribute("align", "center");
     newRow.appendChild(newHead);
 
     //Create and fill in table data element containing the number of donuts
@@ -105,11 +136,60 @@ function displayVoodoo(event) {
     newData.textContent = currentLocation.donutsEachHour[i];
     newRow.appendChild(newData);
 
-    voodooTable.appendChild(newRow);
+    newTableBody.appendChild(newRow);
   }
 
-  //Fill in the total donuts for the day in the pre-existing table data element
-  document.getElementById("total").textContent = currentLocation.totalDonuts;
-
+  return newTableBody;
 }
 
+function voodooFoot(currentLocation) {
+
+  var newTableFoot,
+      newRow,
+      newHead,
+      newData;
+
+  newTableFoot = document.createElement("tfoot")
+  newRow = document.createElement("tr");
+  newRow.setAttribute("height", "10");
+  newTableFoot.appendChild(newRow);
+
+  newRow = document.createElement("tr");
+  newHead = document.createElement("th");
+  newHead.textContent = "Total";
+  newData = document.createElement("td");
+  newData.setAttribute("align", "center");
+  newData.textContent = currentLocation.totalDonuts;
+  newRow.appendChild(newHead);
+  newRow.appendChild(newData);
+
+  newTableFoot.appendChild(newRow);
+
+  return newTableFoot;
+}
+
+function removeVoodoo(event) {
+
+  var oldTable = document.getElementById("voodooTable");
+  oldTable.id = "";
+
+  if (oldTable.finishedTransition) {
+    oldTable.className = "oldTable";
+
+  }
+  else {
+    tableDiv.removeChild(oldTable);
+  }
+}
+
+function transitionFinished(event) {
+
+  if (event.target.className == "currentTable") {
+    event.target.finishedTransition = true;
+    //voodooTable.removeEventListener("transitionend", transitionFinished, false);
+  }
+  else {
+    event.target.removeEventListener("transitionend", transitionFinished, false);
+    tableDiv.removeChild(event.target);
+  }
+}

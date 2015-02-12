@@ -2,11 +2,14 @@
 <html>
   <head>
     <title>Voodoo Donuts</title>
+    <link href="voodoo.css" type="text/css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <nav>
-      <table cellpadding="15" cellspacing="15">
-        <tr bgcolor="cfcfcf">
+      <table align="center" cellspacing="25">
+        <tr>
           <th class="locationButton" id="downtown">Downtown</th>
           <th class="locationButton" id="capitolHill">Capitol Hill</th>
           <th class="locationButton" id="southLakeUnion">Southlake Union</th>
@@ -15,31 +18,8 @@
         </tr>
       </table>
     </nav>
-    <table cellpadding="5" cellspacing="5">
-
-      <thead>
-        <tr bgcolor="cfcfcf">
-          <th id="locationName" colspan="2">No Location Selected</th>
-        </tr>
-        <tr bgcolor="cfcfcf">
-          <th>Time</th>
-          <th>Donuts This Hour</th>
-        </tr>
-      </thead>
-
-      <tbody id="voodooTable">
-      </tbody>
-
-      <tfoot>
-        <tr height="10"></tr>
-        <tr bgcolor="cfcfcf">
-          <th>Total</th>
-          <td id="total" align="center"></td>
-        </tr>
-      </tfoot>
-
-    </table>
-
+    <div align="center" id="tableDiv">
+    </div>
   </body>
   <script src="voodoo.js"></script>
 </html>
