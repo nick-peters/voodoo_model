@@ -1,6 +1,6 @@
 var downtown = new DonutShop("Downtown", 11, 80, 220, 10, 4),
     capitolHill = new DonutShop("Capitol Hill", 8, 5, 45, 45, 2),
-    southLakeUnion = new DonutShop("South Lake Union", 18, 180, 250, 5, 6),
+    southLakeUnion = new DonutShop("South Lake Union", 17, 180, 250, 5, 6),
     wedgewood = new DonutShop("Wedgewood", 5, 20, 60, 20, 1.5),
     ballard = new DonutShop("Ballard", 12, 25, 175, 33, 1),
     customShop = "";
@@ -25,6 +25,8 @@ customSubmit.addEventListener("click", submitCustom, false);
 for(var i = 0; i < locationButtons.length; i++) {
   locationButtons[i].addEventListener('click', buttonClicked, false)
 }
+
+document.getElementById("forbiddenDonut").addEventListener('click', forbiddenFunction, false);
 
 function DonutShop(address, hoursOpen, footTrafficLow, footTrafficHigh, percentEntering, donutsPerEntrant) {
 
@@ -98,7 +100,7 @@ function displayVoodoo(event) {
   voodooTable.className = "newTable";
   tableDiv.appendChild(voodooTable);
 
-  setTimeout(function() {voodooTable.className = "currentTable";}, 20);
+  setTimeout(function() {voodooTable.className = "currentTable";}, 10);
 
 }
 
@@ -225,11 +227,11 @@ function showCustom(event) {
 
   if (customDonuts.className == "customDonutsHidden") {
     customDonuts.className = "customDonutsShown";
-    event.target.textContent = "-"
+    event.target.textContent = "-";
   }
   else {
     customDonuts.className = "customDonutsHidden";
-    event.target.textContent = "+"
+    event.target.textContent = "+";
   }
 }
 
@@ -246,4 +248,21 @@ function submitCustom(event) {
     customShop.calculateDonuts();
 
     buttonClicked(event);
+}
+
+function forbiddenFunction(event) {
+
+  var body = document.getElementById("bodyContainer"),
+      message = document.getElementById("forbiddenMessage");
+
+  if(body.className == "forbiddenAnimation") {
+    body.className = undefined;
+    message.style.display = "none";
+  }
+
+  else {
+    body.className = "forbiddenAnimation";
+    message.style.display = "block";
+  }
+
 }
