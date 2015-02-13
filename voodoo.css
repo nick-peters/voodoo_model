@@ -78,24 +78,18 @@ div tfoot td {
 
 
 #customDonuts {
-/*  display:none;
-*/
-/*  background-color: red;
-*/  position: fixed;
+  position: fixed;
   top: 300px;
-  left: 0px;
   width: 320px;
-
 }
 
 #showHideButton {
-
-  position: relative;
+  position: absolute;
   color: black;
   text-align: center;
   background-color: lightblue;
   width:35px;
   height:35px;
-  left:35px;
-
+  right:0px;
+  line-height: 34px;
 }
