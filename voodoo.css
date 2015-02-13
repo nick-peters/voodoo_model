@@ -1,8 +1,8 @@
 nav {
 
   position: relative;
-  width: 940px;
-  margin: auto 322px;
+  width: 965px;
+  margin: auto 300px;
 
 }
 body {
@@ -147,6 +147,7 @@ div tfoot td {
   padding-right: 10px;
 
 }
+
 #customSubmit {
 
   width: 100px;
@@ -160,4 +161,44 @@ div tfoot td {
 
 }
 
+#bodyContainer {
+  margin:0;
+  padding:0;
+}
 
+#forbiddenMessage {
+
+  position: fixed;
+  top: 300px;
+  left: 400px;
+  color: black;
+  font-size: 80pt;
+  -webkit-animation: verbotenMessage 0.5s linear infinite;
+  display: none;
+}
+
+@-webkit-keyframes verbotenMessage {
+    from   {-webkit-transform: scale(1, 1);}
+    to  {-webkit-transform: scale(2, 2);}
+}
+
+#forbiddenDonut {
+
+  position: relative;
+  width: 140px;
+  top: 600px;
+  left: 100px;
+  cursor: pointer;
+
+}
+
+.forbiddenAnimation {
+
+  -webkit-animation: verboten 0.2s linear infinite;
+
+}
+
+@-webkit-keyframes verboten {
+    from   {background-color: red; -webkit-transform: rotate(0deg);}
+    to  {background-color: blue; -webkit-transform: rotate(360deg);}
+}
