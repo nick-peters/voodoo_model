@@ -10,42 +10,44 @@
     <nav>
       <table align="center" cellspacing="25">
         <tr>
-          <th class="locationButton" id="downtown">Downtown</th>
-          <th class="locationButton" id="capitolHill">Capitol Hill</th>
-          <th class="locationButton" id="southLakeUnion">Southlake Union</th>
-          <th class="locationButton" id="wedgewood">Wedgewood</th>
-          <th class="locationButton" id="ballard">Ballard</th>
+          <th class="locationButton" donutObject="downtown">Downtown</th>
+          <th class="locationButton" donutObject="capitolHill">Capitol Hill</th>
+          <th class="locationButton" donutObject="southLakeUnion">Southlake Union</th>
+          <th class="locationButton" donutObject="wedgewood">Wedgewood</th>
+          <th class="locationButton" donutObject="ballard">Ballard</th>
         </tr>
       </table>
     </nav>
     <div align="center" id="tableDiv">
     </div>
 
-    <div id="customDonuts">
-      <div id="showHideButton">C</div>
+    <div id="customDonuts" class="customDonutsHidden">
+      <div id="showHideButton">+</div>
       <div>
-        <label for="customName">Location Name</label>
+        <label for="customName" class="customEntry">Location Name:</label>
         <input type="text" id="customName" name="customName"/>
       </div>
       <div>
-        <label for="customTime">Hours Open</label>
+        <label for="customTime" class="customEntry">Hours Open:</label>
         <input type="text" id="customTime" name="customTime"/>
       </div>
       <div>
-        <label for="customLowTraffic">Low End Traffic</label>
+        <label for="customLowTraffic" class="customEntry">Low End Traffic:</label>
         <input type="text" id="customLowTraffic" name="customLowTraffic"/>
       </div>
       <div>
-        <label for="customHighTraffic">High End Traffic</label>
+        <label for="customHighTraffic" class="customEntry">High End Traffic:</label>
         <input type="text" id="customHighTraffic" name="customHighTraffic"/>
       </div>
       <div>
-        <label for="customEntering">Percent Entering</label>
+        <label for="customEntering" class="customEntry">Percent Entering:</label>
         <input type="text" id="customEntering" name="customEntering"/>
       </div>
       <div>
-        <label for="customDonutPerEntrant">Percent Entering</label>
+        <label for="customDonutPerEntrant" class="customEntry">Donuts Per Entrant:</label>
         <input type="text" id="customDonutPerEntrant" name="customDonutPerEntrant"/>
+      </div>
+      <div id="customSubmit" class="locationButton" donutObject="customShop">Custom
       </div>
     </div>
   </body>
